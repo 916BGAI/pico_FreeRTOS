@@ -94,14 +94,4 @@ target_link_libraries(${PROJECT_NAME}
 
 pico_add_extra_outputs(${PROJECT_NAME})
 
-set(project_name ${PROJECT_NAME})
-
-configure_file("${PROJECT_SOURCE_DIR}/mem.sh"
-               "${PROJECT_SOURCE_DIR}/build/mem.sh"
-               @ONLY
-               )
-
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-    COMMAND ./mem.sh
-    COMMENT "The memory usage"
-    )
+string(APPEND CMAKE_EXE_LINKER_FLAGS "-Wl,--print-memory-usage")
